@@ -8,7 +8,7 @@ class complex_num
     double img;
 
 public:
-    complex_num (double real = 0 ;double = img = 0)
+    complex_num (double real = 0 , double = img = 0)
     {
         this->real = real;
         this->img = img;
