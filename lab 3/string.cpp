@@ -94,46 +94,49 @@ friend istream& operator>>(istream& in, String& st);
 
     char operator[](int index)
     {
+        if(index<0 || index>size-1)
+        {
+            throw  exception();
+        }
         return ptr[index];
     }
 
-    int Ahmed_Strcmp(String str1, String str2)
+    int Ahmed_Strcmp(String &str2)
     {
 
-    if(str1.len() < str2.len()){
+    if(this->len() < str2.len()){
         return -1;
     }
-    if(str1.len() > str2.len()){
+    if( this->len() > str2.len()){
         return 1;
     }
 
 
-    for(int i =0; (str1.ptr)[i] != '\0'; i++)
+    for(int i =0; (this->ptr)[i] != '\0'; i++)
     {
-        if((str1.ptr)[i] > (str2.ptr)[i]){
+        if((this->ptr)[i] > (str2.ptr)[i]){
             return 1;
         }
-        if((str1.ptr)[i] < (str2.ptr)[i]){
+        if((this->ptr)[i] < (str2.ptr)[i]){
             return -1;
         }
     }
     return 0;
     }
 
-    void Ahmed_Strcpy(String source)
+    void Ahmed_Strcpy(String &source)
     {
-        int i,j=this->size;
-        char * s= this->ptr;
-        this->ptr=new char[this->size+source.size-1];
-            for(i=0; s[i] != '\0'; i++)
+        int i=0;
+        char * s= new char[source.size+1];;
+            for(i; (source.ptr)[i] != '\0'; i++)
             {
-                (this->ptr)[i] = s[i];
+                 s[i]=(source.ptr)[i];
             }
-            for(i; source[i] != '\0'; i++)
-            {
-                (this->ptr)[i]= source[i];
-            }
-        (this->ptr)[i] = '\0';
+
+        s[i] = '\0';
+        this->size=i;
+        delete [] ptr;
+        ptr=s;
 
     }
 
@@ -186,13 +189,16 @@ int main(){
     // cout<<endl;
     // x=y;
     // cout<<x;
-    String x,y;
+    //String x,y;
+    String x="ahmed";
+    String y=" sayed";
+    x.Ahmed_Strcpy(y);
     // x = "123";
     // y = "456";
     // y = x+y;
     // cout<<y<<endl;
     // cout<<x<<endl;
-    cin >> x;
+    //cin >> x;
     cout<<"\n"<<x<<endl;
     return 0;
 }
